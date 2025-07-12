@@ -30,5 +30,10 @@
     "serverless-http": "^3.2.0",
     "socket.io": "^4.8.1",
     "uuid": "^11.1.0"
-  }
+  },
+  "authors": {
+  "name": "Sanskar Bandgar",
+  "role": "Fullstack Developer | Freelancer",
+  "email": "mr.sanskar19@gmail.com"
+}
 }

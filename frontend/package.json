@@ -80,5 +80,10 @@
     "typescript": "^5.5.3",
     "typescript-eslint": "^8.0.1",
     "vite": "^5.4.1"
-  }
+  },
+  "authors": {
+  "name": "Sanskar Bandgar",
+  "role": "Fullstack Developer | Freelancer",
+  "email": "mr.sanskar19@gmail.com"
+}
 }
