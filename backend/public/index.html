@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EduPlatform API Documentation</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="container">
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <h1>EduPlatform API</h1>
+        <p class="version">v1.0.0</p>
+      </div>
+      <nav class="sidebar-nav">
+        <ul>
+          <li><a href="#introduction">Introduction</a></li>
+          <li><a href="#authentication">Authentication</a></li>
+          <li>
+            <a href="#endpoints">Endpoints</a>
+            <ul>
+              <li><a href="#auth-endpoints">Authentication</a></li>
+              <li><a href="#user-endpoints">Users</a></li>
+              <li><a href="#course-endpoints">Courses</a></li>
+              <li><a href="#content-endpoints">Content</a></li>
+              <li><a href="#session-endpoints">Live Sessions</a></li>
+              <li><a href="#payment-endpoints">Payments</a></li>
+              <li><a href="#enrollment-endpoints">Enrollments</a></li>
+              <li><a href="#progress-endpoints">Progress</a></li>
+              <li><a href="#certificate-endpoints">Certificates</a></li>
+              <li><a href="#admin-endpoints">Admin</a></li>
+            </ul>
+          </li>
+          <li><a href="#models">Data Models</a></li>
+          <li><a href="#websockets">WebSocket API</a></li>
+          <li><a href="#errors">Error Handling</a></li>
+        </ul>
+      </nav>
+    </aside>
+    <main class="content">
+      <section id="introduction">
+        <h2>Introduction</h2>
+        <p>
+          Welcome to the EduPlatform API documentation. This API allows you to build applications that interact with the EduPlatform e-learning system.
+          You can manage users, courses, content, live sessions, payments, enrollments, progress tracking, and certificates.
+        </p>
+        <div class="info-box">
+          <h3>Base URL</h3>
+          <p><code>https://api.eduplatform.com/api</code></p>
+        </div>
+      </section>
+
+      <section id="authentication">
+        <h2>Authentication</h2>
+        <p>
+          The EduPlatform API uses JSON Web Tokens (JWT) for authentication. To authenticate your requests, you need to include the JWT token in the Authorization header.
+        </p>
+        <div class="code-block">
+          <pre><code>Authorization: Bearer &lt;your_token&gt;</code></pre>
+        </div>
+        <p>
+          You can obtain a token by using the <a href="#auth-login">Login endpoint</a>.
+        </p>
+      </section>
+
+      <section id="endpoints">
+        <h2>Endpoints</h2>
+
+        <section id="auth-endpoints">
+          <h3>Authentication Endpoints</h3>
+
+          <div class="endpoint" id="auth-signup">
+            <div class="endpoint-header">
+              <span class="method post">POST</span>
+              <span class="path">/auth/signup</span>
+            </div>
+            <div class="endpoint-content">
+              <p>Register a new user.</p>
+              <h4>Request Body</h4>
+              <div class="code-block">
+<pre><code>{
+  "name": "John Doe",
+  "email": "john@example.com",
+  "password": "password123",
+  "role": "student" // Optional, defaults to "student"
+}</code></pre>
+              </div>
+              <h4>Response</h4>
+              <div class="code-block">
+<pre><code>{
+  "success": true,
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+  "user": {
+    "_id": "60d21b4667d0d8992e610c85",
+    "name": "John Doe",
+    "email": "john@example.com",
+    "role": "student"
+  }
+}</code></pre>
+              </div>
+            </div>
+          </div>
+
+          <div class="endpoint" id="auth-login">
+            <div class="endpoint-header">
+              <span class="method post">POST</span>
+              <span class="path">/auth/login</span>
+            </div>
+            <div class="endpoint-content">
+              <p>Login a user.</p>
+              <h4>Request Body</h4>
+              <div class="code-block">
+<pre><code>{
+  "email": "john@example.com",
+  "password": "password123"
+}</code></pre>
+              </div>
+              <h4>Response</h4>
+              <div class="code-block">
+<pre><code>{
+  "success": true,
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+  "user": {
+    "_id": "60d21b4667d0d8992e610c85",
+    "name": "John Doe",
+    "email": "john@example.com",
+    "role": "student"
+  }
+}</code></pre>
+              </div>
+            </div>
+          </div>
+
+          <div class="endpoint">
+            <div class="endpoint-header">
+              <span class="method get">GET</span>
+              <span class="path">/auth/me</span>
+            </div>
+            <div class="endpoint-content">
+              <p>Get the current logged-in user.</p>
+              <h4>Response</h4>
+              <div class="code-block">
+<pre><code>{
+  "success": true,
+  "data": {
+    "_id": "60d21b4667d0d8992e610c85",
+    "name": "John Doe",
+    "email": "john@example.com",
+    "role": "student"
+  }
+}</code></pre>
+              </div>
+            </div>
+          </div>
+
+          <div class="endpoint">
+            <div class="endpoint-header">
+              <span class="method get">GET</span>
+              <span class="path">/auth/logout</span>
+            </div>
+            <div class="endpoint-content">
+              <p>Logout the current user.</p>
+              <h4>Response</h4>
+              <div class="code-block">
+<pre><code>{
+  "success": true,
+  "message": "User logged out successfully"
+}</code></pre>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="user-endpoints">
+          <h3>User Endpoints</h3>
+
+          <div class="endpoint">
+            <div class="endpoint-header">
+              <span class="method get">GET</span>
+              <span class="path">/user/profile</span>
+            </div>
+            <div class="endpoint-content">
+              <p>Get the user's profile.</p>
+              <h4>Response</h4>
+              <div class="code-block">
+<pre><code>{
+  "success": true,
+  "data": {
+    "_id": "60d21b4667d0d8992e610c85",
+    "name": "John Doe",
+    "email": "john@example.com",
+    "role": "student",
+    "profileImage": "https://res.cloudinary.com/..."
+  }
+}</code></pre>
+              </div>
+            </div>
+          </div>
+
+          <div class="endpoint">
+            <div class="endpoint-header">
+              <span class="method patch">PATCH</span>
+              <span class="path">/user/update-profile</span>
+            </div>
+            <div class="endpoint-content">
+              <p>Update the user's profile.</p>
+              <h4>Request Body</h4>
+              <div class="code-block">
+<pre><code>{
+  "name": "John Smith",
+  "email": "john.smith@example.com"
+}</code></pre>
+              </div>
+              <h4>Response</h4>
+              <div class="code-block">
+<pre><code>{
+  "success": true,
+  "data": {
+    "_id": "60d21b4667d0d8992e610c85",
+    "name": "John Smith",
+    "email": "john.smith@example.com",
+    "role": "student",
+    "profileImage": "https://res.cloudinary.com/..."
+  }
+}</code></pre>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="course-endpoints">
+          <h3>Course Endpoints</h3>
+
+          <div class="endpoint">
+            <div class="endpoint-header">
+              <span class="method get">GET</span>
+              <span class="path">/courses</span>
+            </div>
+            <div class="endpoint-content">
+              <p>Get all courses.</p>
+              <h4>Query Parameters</h4>
+              <table class="params-table">
+                <thead>
+                  <tr>
+                    <th>Parameter</th>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>category</td>
+                    <td>string</td>
+                    <td>Filter by category</td>
+                  </tr>
+                  <tr>
+                    <td>level</td>
+                    <td>string</td>
+                    <td>Filter by level (beginner, intermediate, advanced)</td>
+                  </tr>
+                  <tr>
+                    <td>minPrice</td>
+                    <td>number</td>
+                    <td>Filter by minimum price</td>
+                  </tr>
+                  <tr>
+                    <td>maxPrice</td>
+                    <td>number</td>
+                    <td>Filter by maximum price</td>
+                  </tr>
+                  <tr>
+                    <td>search</td>
+                    <td>string</td>
+                    <td>Search by title or description</td>
+                  </tr>
+                  <tr>
+                    <td>page</td>
+                    <td>number</td>
+                    <td>Page number (default: 1)</td>
+                  </tr>
+                  <tr>
+                    <td>limit</td>
+                    <td>number</td>
+                    <td>Number of results per page (default: 10)</td>
+                  </tr>
+                  <tr>
+                    <td>sort</td>
+                    <td>string</td>
+                    <td>Sort field (default: -createdAt)</td>
+                  </tr>
+                </tbody>
+              </table>
+              <h4>Response</h4>
+              <div class="code-block">
+<pre><code>{
+  "success": true,
+  "count": 2,
+  "total": 10,
+  "pagination": {
+    "page": 1,
+    "limit": 10,
+    "pages": 1
+  },
+  "data": [
+    {
+      "_id": "60d21b4667d0d8992e610c85",
+      "title": "Introduction to JavaScript",
+      "description": "Learn the basics of JavaScript",
+      "price": 49.99,
+      "thumbnailUrl": "https://res.cloudinary.com/...",
+      "teacherIds": [
+        {
+          "_id": "60d21b4667d0d8992e610c85",
+          "name": "John Doe",
+          "profileImage": "https://res.cloudinary.com/..."
+        }
+      ]
+    },
+    // More courses...
+  ]
+}</code></pre>
+              </div>
+            </div>
+          </div>
+
+          <div class="endpoint">
+            <div class="endpoint-header">
+              <span class="method get">GET</span>
+              <span class="path">/courses/enrolled</span>
+            </div>
+            <div class="endpoint-content">
+              <p>Get courses the user is enrolled in.</p>
+              <h4>Query Parameters</h4>
+              <table class="params-table">
+                <thead>
+                  <tr>
+                    <th>Parameter</th>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>page</td>
+                    <td>number</td>
+                    <td>Page number (default: 1)</td>
+                  </tr>
+                  <tr>
+                    <td>limit</td>
+                    <td>number</td>
+                    <td>Number of results per page (default: 10)</td>
+                  </tr>
+                  <tr>
+                    <td>sort</td>
+                    <td>string</td>
+                    <td>Sort field (default: -enrollmentDate)</td>
+                  </tr>
+                </tbody>
+              </table>
+              <h4>Response</h4>
+              <div class="code-block">
+<pre><code>{
+  "success": true,
+  "count": 2,
+  "total": 2,
+  "pagination": {
+    "page": 1,
+    "limit": 10,
+    "pages": 1
+  },
+  "data": [
+    {
+      "_id": "60d21b4667d0d8992e610c85",
+      "title": "Introduction to JavaScript",
+      "description": "Learn the basics of JavaScript",
+      "price": 49.99,
+      "thumbnailUrl": "https://res.cloudinary.com/...",
+      "enrollmentDate": "2023-01-15T12:00:00.000Z",
+      "progress": 75
+    },
+    // More courses...
+  ]
+}</code></pre>
+              </div>
+            </div>
+          </div>
+
+          <div class="endpoint">
+            <div class="endpoint-header">
+              <span class="method get">GET</span>
+              <span class="path">/courses/teaching</span>
+            </div>
+            <div class="endpoint-content">
+              <p>Get courses the user is teaching (teacher only).</p>
+              <h4>Query Parameters</h4>
+              <table class="params-table">
+                <thead>
+                  <tr>
+                    <th>Parameter</th>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>isPublished</td>
+                    <td>boolean</td>
+                    <td>Filter by published status</td>
+                  </tr>
+                  <tr>
+                    <td>page</td>
+                    <td>number</td>
+                    <td>Page number (default: 1)</td>
+                  </tr>
+                  <tr>
+                    <td>limit</td>
+                    <td>number</td>
+                    <td>Number of results per page (default: 10)</td>
+                  </tr>
+                  <tr>
+                    <td>sort</td>
+                    <td>string</td>
+                    <td>Sort field (default: -createdAt)</td>
+                  </tr>
+                </tbody>
+              </table>
+              <h4>Response</h4>
+              <div class="code-block">
+<pre><code>{
+  "success": true,
+  "count": 2,
+  "total": 2,
+  "pagination": {
+    "page": 1,
+    "limit": 10,
+    "pages": 1
+  },
+  "data": [
+    {
+      "_id": "60d21b4667d0d8992e610c85",
+      "title": "Introduction to JavaScript",
+      "description": "Learn the basics of JavaScript",
+      "price": 49.99,
+      "thumbnailUrl": "https://res.cloudinary.com/...",
+      "isPublished": true,
+      "enrollmentCount": 25,
+      "revenue": 1249.75
+    },
+    // More courses...
+  ]
+}</code></pre>
+              </div>
+            </div>
+          </div>
+
+          <!-- More course endpoints... -->
+        </section>
+
+        <section id="admin-endpoints">
+          <h3>Admin Endpoints</h3>
+
+          <div class="endpoint">
+            <div class="endpoint-header">
+              <span class="method get">GET</span>
+              <span class="path">/admin/users</span>
+            </div>
+            <div class="endpoint-content">
+              <p>Get all users (admin only).</p>
+              <h4>Query Parameters</h4>
+              <table class="params-table">
+                <thead>
+                  <tr>
+                    <th>Parameter</th>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>role</td>
+                    <td>string</td>
+                    <td>Filter by role (student, teacher, admin)</td>
+                  </tr>
+                  <tr>
+                    <td>search</td>
+                    <td>string</td>
+                    <td>Search by name or email</td>
+                  </tr>
+                  <tr>
+                    <td>page</td>
+                    <td>number</td>
+                    <td>Page number (default: 1)</td>
+                  </tr>
+                  <tr>
+                    <td>limit</td>
+                    <td>number</td>
+                    <td>Number of results per page (default: 10)</td>
+                  </tr>
+                </tbody>
+              </table>
+              <h4>Response</h4>
+              <div class="code-block">
+<pre><code>{
+  "success": true,
+  "count": 2,
+  "total": 10,
+  "pagination": {
+    "page": 1,
+    "limit": 10,
+    "pages": 1
+  },
+  "data": [
+    {
+      "_id": "60d21b4667d0d8992e610c85",
+      "name": "John Doe",
+      "email": "john@example.com",
+      "role": "student",
+      "profileImage": "https://res.cloudinary.com/...",
+      "createdAt": "2023-01-15T12:00:00.000Z"
+    },
+    // More users...
+  ]
+}</code></pre>
+              </div>
+            </div>
+          </div>
+
+          <div class="endpoint">
+            <div class="endpoint-header">
+              <span class="method get">GET</span>
+              <span class="path">/admin/analytics/dashboard</span>
+            </div>
+            <div class="endpoint-content">
+              <p>Get dashboard analytics (admin only).</p>
+              <h4>Response</h4>
+              <div class="code-block">
+<pre><code>{
+  "success": true,
+  "data": {
+    "totalUsers": 150,
+    "totalCourses": 25,
+    "totalEnrollments": 300,
+    "totalRevenue": 12500,
+    "usersByRole": {
+      "student": 120,
+      "teacher": 25,
+      "admin": 5
+    },
+    "revenueByMonth": [
+      { "month": "Jan", "revenue": 1200 },
+      { "month": "Feb", "revenue": 1500 },
+      // More months...
+    ],
+    "enrollmentsByMonth": [
+      { "month": "Jan", "enrollments": 30 },
+      { "month": "Feb", "enrollments": 45 },
+      // More months...
+    ],
+    "topCourses": [
+      {
+        "_id": "60d21b4667d0d8992e610c85",
+        "title": "Introduction to JavaScript",
+        "enrollmentCount": 50,
+        "revenue": 2499.50
+      },
+      // More courses...
+    ]
+  }
+}</code></pre>
+              </div>
+            </div>
+          </div>
+
+          <!-- More admin endpoints... -->
+        </section>
+
+        <!-- More endpoint sections... -->
+      </section>
+
+      <section id="models">
+        <h2>Data Models</h2>
+        <p>
+          This section describes the data models used in the EduPlatform API.
+        </p>
+
+        <div class="model">
+          <h3>User</h3>
+          <div class="code-block">
+<pre><code>{
+  "_id": "ObjectId",
+  "name": "String",
+  "email": "String",
+  "password": "String (hashed)",
+  "role": "String (student, teacher, admin)",
+  "profileImage": "String (URL)",
+  "createdAt": "Date",
+  "updatedAt": "Date"
+}</code></pre>
+          </div>
+        </div>
+
+        <div class="model">
+          <h3>Course</h3>
+          <div class="code-block">
+<pre><code>{
+  "_id": "ObjectId",
+  "title": "String",
+  "description": "String",
+  "price": "Number",
+  "thumbnailUrl": "String (URL)",
+  "teacherIds": ["ObjectId (User)"],
+  "content": ["ObjectId (Content)"],
+  "sessions": ["ObjectId (LiveSession)"],
+  "enrolledStudentIds": ["ObjectId (User)"],
+  "category": "String",
+  "level": "String (beginner, intermediate, advanced)",
+  "duration": "Number (minutes)",
+  "isPublished": "Boolean",
+  "createdAt": "Date",
+  "updatedAt": "Date"
+}</code></pre>
+          </div>
+        </div>
+
+        <!-- More models... -->
+      </section>
+
+      <section id="websockets">
+        <h2>WebSocket API</h2>
+        <p>
+          The EduPlatform API uses Socket.IO for real-time communication during live sessions.
+        </p>
+
+        <div class="info-box">
+          <h3>WebSocket URL</h3>
+          <p><code>wss://api.eduplatform.com</code></p>
+        </div>
+
+        <h3>Events</h3>
+
+        <div class="event">
+          <h4>join-room</h4>
+          <p>Join a live session room.</p>
+          <div class="code-block">
+<pre><code>// Client emits
+socket.emit('join-room', roomId, userId);
+
+// Server listens
+socket.on('join-room', (roomId, userId) => {
+  // Handle join room
+});</code></pre>
+          </div>
+        </div>
+
+        <div class="event">
+          <h4>user-connected</h4>
+          <p>Notifies when a user connects to the room.</p>
+          <div class="code-block">
+<pre><code>// Server emits
+socket.to(roomId).emit('user-connected', userId);
+
+// Client listens
+socket.on('user-connected', (userId) => {
+  // Handle user connected
+});</code></pre>
+          </div>
+        </div>
+
+        <!-- More events... -->
+      </section>
+
+      <section id="errors">
+        <h2>Error Handling</h2>
+        <p>
+          The EduPlatform API uses standard HTTP status codes to indicate the success or failure of an API request.
+        </p>
+
+        <table class="params-table">
+          <thead>
+            <tr>
+              <th>Status Code</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>200</td>
+              <td>OK - The request was successful</td>
+            </tr>
+            <tr>
+              <td>201</td>
+              <td>Created - The resource was successfully created</td>
+            </tr>
+            <tr>
+              <td>400</td>
+              <td>Bad Request - The request was invalid</td>
+            </tr>
+            <tr>
+              <td>401</td>
+              <td>Unauthorized - Authentication is required</td>
+            </tr>
+            <tr>
+              <td>403</td>
+              <td>Forbidden - The user does not have permission</td>
+            </tr>
+            <tr>
+              <td>404</td>
+              <td>Not Found - The resource was not found</td>
+            </tr>
+            <tr>
+              <td>500</td>
+              <td>Internal Server Error - Something went wrong on the server</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3>Error Response Format</h3>
+        <div class="code-block">
+<pre><code>{
+  "success": false,
+  "message": "Error message",
+  "error": "Detailed error information (development only)"
+}</code></pre>
+        </div>
+      </section>
+    </main>
+  </div>
+  <script>
+    // Simple script to handle sidebar navigation
+    document.addEventListener('DOMContentLoaded', function() {
+      const links = document.querySelectorAll('.sidebar-nav a');
+
+      links.forEach(link => {
+        link.addEventListener('click', function(e) {
+          // Smooth scroll to section
+          const targetId = this.getAttribute('href');
+          const targetElement = document.querySelector(targetId);
+
+          if (targetElement) {
+            e.preventDefault();
+            window.scrollTo({
+              top: targetElement.offsetTop - 20,
+              behavior: 'smooth'
+            });
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>

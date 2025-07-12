@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EduPlatform Admin Dashboard</title>
+  <link rel="stylesheet" href="admin.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <div class="admin-container">
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <h1>EduPlatform</h1>
+        <p class="role">Admin Dashboard</p>
+      </div>
+      <nav class="sidebar-nav">
+        <ul>
+          <li class="active"><a href="#" data-section="dashboard"><span class="icon">📊</span> Dashboard</a></li>
+          <li><a href="#" data-section="users"><span class="icon">👥</span> Users</a></li>
+          <li><a href="#" data-section="courses"><span class="icon">📚</span> Courses</a></li>
+          <li><a href="#" data-section="enrollments"><span class="icon">📝</span> Enrollments</a></li>
+          <li><a href="#" data-section="payments"><span class="icon">💰</span> Payments</a></li>
+          <li><a href="#" data-section="analytics"><span class="icon">📈</span> Analytics</a></li>
+          <li><a href="#" data-section="settings"><span class="icon">⚙️</span> Settings</a></li>
+        </ul>
+      </nav>
+      <div class="sidebar-footer">
+        <a href="#" class="logout-btn"><span class="icon">🚪</span> Logout</a>
+      </div>
+    </aside>
+    <main class="content">
+      <header class="content-header">
+        <div class="search-container">
+          <input type="text" placeholder="Search..." class="search-input">
+          <button class="search-btn">🔍</button>
+        </div>
+        <div class="user-menu">
+          <span class="notifications">🔔</span>
+          <div class="user-profile">
+            <img src="https://via.placeholder.com/40" alt="Admin User" class="avatar">
+            <span class="user-name">Admin User</span>
+          </div>
+        </div>
+      </header>
+
+      <!-- Dashboard Section -->
+      <section id="dashboard" class="content-section active">
+        <h2>Dashboard Overview</h2>
+
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-icon users">👥</div>
+            <div class="stat-content">
+              <h3>Total Users</h3>
+              <p class="stat-value">1,250</p>
+              <p class="stat-change positive">+12% this month</p>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon courses">📚</div>
+            <div class="stat-content">
+              <h3>Total Courses</h3>
+              <p class="stat-value">85</p>
+              <p class="stat-change positive">+5% this month</p>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon enrollments">📝</div>
+            <div class="stat-content">
+              <h3>Enrollments</h3>
+              <p class="stat-value">3,420</p>
+              <p class="stat-change positive">+18% this month</p>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon revenue">💰</div>
+            <div class="stat-content">
+              <h3>Total Revenue</h3>
+              <p class="stat-value">$42,500</p>
+              <p class="stat-change positive">+15% this month</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="charts-container">
+          <div class="chart-card">
+            <h3>Revenue Overview</h3>
+            <canvas id="revenueChart"></canvas>
+          </div>
+          <div class="chart-card">
+            <h3>User Growth</h3>
+            <canvas id="userGrowthChart"></canvas>
+          </div>
+        </div>
+
+        <div class="tables-container">
+          <div class="table-card">
+            <div class="card-header">
+              <h3>Recent Enrollments</h3>
+              <a href="#" class="view-all">View All</a>
+            </div>
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Student</th>
+                  <th>Course</th>
+                  <th>Date</th>
+                  <th>Amount</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>John Smith</td>
+                  <td>Advanced JavaScript</td>
+                  <td>May 15, 2025</td>
+                  <td>$49.99</td>
+                </tr>
+                <tr>
+                  <td>Sarah Johnson</td>
+                  <td>React Fundamentals</td>
+                  <td>May 14, 2025</td>
+                  <td>$39.99</td>
+                </tr>
+                <tr>
+                  <td>Michael Brown</td>
+                  <td>Python for Data Science</td>
+                  <td>May 14, 2025</td>
+                  <td>$59.99</td>
+                </tr>
+                <tr>
+                  <td>Emily Davis</td>
+                  <td>UI/UX Design Principles</td>
+                  <td>May 13, 2025</td>
+                  <td>$49.99</td>
+                </tr>
+                <tr>
+                  <td>David Wilson</td>
+                  <td>Node.js Backend Development</td>
+                  <td>May 12, 2025</td>
+                  <td>$54.99</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="table-card">
+            <div class="card-header">
+              <h3>Top Courses</h3>
+              <a href="#" class="view-all">View All</a>
+            </div>
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Course</th>
+                  <th>Teacher</th>
+                  <th>Enrollments</th>
+                  <th>Revenue</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Advanced JavaScript</td>
+                  <td>John Doe</td>
+                  <td>245</td>
+                  <td>$12,245</td>
+                </tr>
+                <tr>
+                  <td>React Fundamentals</td>
+                  <td>Jane Smith</td>
+                  <td>198</td>
+                  <td>$7,920</td>
+                </tr>
+                <tr>
+                  <td>Python for Data Science</td>
+                  <td>Robert Johnson</td>
+                  <td>187</td>
+                  <td>$11,219</td>
+                </tr>
+                <tr>
+                  <td>UI/UX Design Principles</td>
+                  <td>Lisa Brown</td>
+                  <td>156</td>
+                  <td>$7,799</td>
+                </tr>
+                <tr>
+                  <td>Node.js Backend Development</td>
+                  <td>Michael Wilson</td>
+                  <td>142</td>
+                  <td>$7,809</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- Users Section -->
+      <section id="users" class="content-section">
+        <div class="section-header">
+          <h2>User Management</h2>
+          <button class="primary-btn">Add New User</button>
+        </div>
+
+        <div class="filter-bar">
+          <div class="filter-group">
+            <label for="role-filter">Role:</label>
+            <select id="role-filter" class="filter-select">
+              <option value="">All Roles</option>
+              <option value="student">Student</option>
+              <option value="teacher">Teacher</option>
+              <option value="admin">Admin</option>
+            </select>
+          </div>
+          <div class="filter-group">
+            <label for="status-filter">Status:</label>
+            <select id="status-filter" class="filter-select">
+              <option value="">All Status</option>
+              <option value="active">Active</option>
+              <option value="inactive">Inactive</option>
+            </select>
+          </div>
+          <div class="filter-group search">
+            <input type="text" placeholder="Search users..." class="filter-input">
+          </div>
+        </div>
+
+        <div class="table-container">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Role</th>
+                <th>Joined Date</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <div class="user-info">
+                    <img src="https://via.placeholder.com/40" alt="John Smith" class="avatar">
+                    <span>John Smith</span>
+                  </div>
+                </td>
+                <td>john.smith@example.com</td>
+                <td><span class="badge student">Student</span></td>
+                <td>May 10, 2025</td>
+                <td><span class="badge active">Active</span></td>
+                <td>
+                  <div class="action-buttons">
+                    <button class="action-btn view">👁️</button>
+                    <button class="action-btn edit">✏️</button>
+                    <button class="action-btn delete">🗑️</button>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="user-info">
+                    <img src="https://via.placeholder.com/40" alt="Jane Doe" class="avatar">
+                    <span>Jane Doe</span>
+                  </div>
+                </td>
+                <td>jane.doe@example.com</td>
+                <td><span class="badge teacher">Teacher</span></td>
+                <td>Apr 15, 2025</td>
+                <td><span class="badge active">Active</span></td>
+                <td>
+                  <div class="action-buttons">
+                    <button class="action-btn view">👁️</button>
+                    <button class="action-btn edit">✏️</button>
+                    <button class="action-btn delete">🗑️</button>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="user-info">
+                    <img src="https://via.placeholder.com/40" alt="Robert Johnson" class="avatar">
+                    <span>Robert Johnson</span>
+                  </div>
+                </td>
+                <td>robert.johnson@example.com</td>
+                <td><span class="badge teacher">Teacher</span></td>
+                <td>Mar 22, 2025</td>
+                <td><span class="badge active">Active</span></td>
+                <td>
+                  <div class="action-buttons">
+                    <button class="action-btn view">👁️</button>
+                    <button class="action-btn edit">✏️</button>
+                    <button class="action-btn delete">🗑️</button>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="user-info">
+                    <img src="https://via.placeholder.com/40" alt="Emily Davis" class="avatar">
+                    <span>Emily Davis</span>
+                  </div>
+                </td>
+                <td>emily.davis@example.com</td>
+                <td><span class="badge student">Student</span></td>
+                <td>Feb 18, 2025</td>
+                <td><span class="badge inactive">Inactive</span></td>
+                <td>
+                  <div class="action-buttons">
+                    <button class="action-btn view">👁️</button>
+                    <button class="action-btn edit">✏️</button>
+                    <button class="action-btn delete">🗑️</button>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="user-info">
+                    <img src="https://via.placeholder.com/40" alt="Michael Wilson" class="avatar">
+                    <span>Michael Wilson</span>
+                  </div>
+                </td>
+                <td>michael.wilson@example.com</td>
+                <td><span class="badge admin">Admin</span></td>
+                <td>Jan 05, 2025</td>
+                <td><span class="badge active">Active</span></td>
+                <td>
+                  <div class="action-buttons">
+                    <button class="action-btn view">👁️</button>
+                    <button class="action-btn edit">✏️</button>
+                    <button class="action-btn delete">🗑️</button>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="pagination">
+          <button class="pagination-btn prev">Previous</button>
+          <div class="pagination-numbers">
+            <button class="pagination-number active">1</button>
+            <button class="pagination-number">2</button>
+            <button class="pagination-number">3</button>
+            <span class="pagination-ellipsis">...</span>
+            <button class="pagination-number">10</button>
+          </div>
+          <button class="pagination-btn next">Next</button>
+        </div>
+      </section>
+
+      <!-- Other sections would be implemented similarly -->
+      <section id="courses" class="content-section">
+        <h2>Course Management</h2>
+        <p>Course management interface would go here.</p>
+      </section>
+
+      <section id="enrollments" class="content-section">
+        <h2>Enrollment Management</h2>
+        <p>Enrollment management interface would go here.</p>
+      </section>
+
+      <section id="payments" class="content-section">
+        <h2>Payment Management</h2>
+        <p>Payment management interface would go here.</p>
+      </section>
+
+      <section id="analytics" class="content-section">
+        <h2>Analytics</h2>
+        <p>Detailed analytics interface would go here.</p>
+      </section>
+
+      <section id="settings" class="content-section">
+        <h2>Settings</h2>
+        <p>Settings interface would go here.</p>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    // Initialize charts
+    document.addEventListener('DOMContentLoaded', function() {
+      // Revenue Chart
+      const revenueCtx = document.getElementById('revenueChart').getContext('2d');
+      const revenueChart = new Chart(revenueCtx, {
+        type: 'line',
+        data: {
+          labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+          datasets: [{
+            label: 'Revenue',
+            data: [4500, 5200, 6800, 8200, 9500, 12000],
+            backgroundColor: 'rgba(16, 185, 129, 0.2)',
+            borderColor: 'rgba(16, 185, 129, 1)',
+            borderWidth: 2,
+            tension: 0.4
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          scales: {
+            y: {
+              beginAtZero: true,
+              ticks: {
+                callback: function(value) {
+                  return '$' + value;
+                }
+              }
+            }
+          }
+        }
+      });
+
+      // User Growth Chart
+      const userGrowthCtx = document.getElementById('userGrowthChart').getContext('2d');
+      const userGrowthChart = new Chart(userGrowthCtx, {
+        type: 'bar',
+        data: {
+          labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+          datasets: [
+            {
+              label: 'Students',
+              data: [85, 95, 130, 150, 180, 210],
+              backgroundColor: 'rgba(59, 130, 246, 0.7)'
+            },
+            {
+              label: 'Teachers',
+              data: [15, 18, 22, 25, 30, 35],
+              backgroundColor: 'rgba(245, 158, 11, 0.7)'
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          scales: {
+            y: {
+              beginAtZero: true
+            }
+          }
+        }
+      });
+
+      // Navigation
+      const navLinks = document.querySelectorAll('.sidebar-nav a');
+      const sections = document.querySelectorAll('.content-section');
+
+      navLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+          e.preventDefault();
+
+          // Remove active class from all links and sections
+          navLinks.forEach(link => link.parentElement.classList.remove('active'));
+          sections.forEach(section => section.classList.remove('active'));
+
+          // Add active class to clicked link and corresponding section
+          this.parentElement.classList.add('active');
+          const sectionId = this.getAttribute('data-section');
+          document.getElementById(sectionId).classList.add('active');
+        });
+      });
+    });
+  </script>
+</body>
+</html>
