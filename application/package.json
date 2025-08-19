@@ -1,33 +1,33 @@
 {
-  "name": "learnx",
-  "license": "0BSD",
-  "version": "1.0.0",
-  "main": "index.js",
-  "scripts": {
-    "start": "expo start --dev-client",
-    "android": "expo run:android",
-    "ios": "expo run:ios",
-    "web": "expo start --web"
-  },
-  "dependencies": {
-    "@expo/metro-runtime": "~5.0.4",
-    "expo": "~53.0.9",
-    "expo-router": "~5.1.0",
-    "expo-splash-screen": "^0.30.9",
-    "expo-status-bar": "~2.2.3",
-    "react": "19.0.0",
-    "react-dom": "19.0.0",
-    "react-native": "0.79.2",
-    "react-native-web": "^0.20.0",
-    "react-native-webview": "13.13.5"
-  },
-  "devDependencies": {
-    "@babel/core": "^7.20.0"
-  },
-  "authors": {
-  "name": "Sanskar Bandgar",
-  "role": "Fullstack Developer | Freelancer",
-  "email": "mr.sanskar19@gmail.com"
-},
-  "private": true
+    "name": "learnx",
+    "license": "0BSD",
+    "version": "1.0.0",
+    "main": "index.js",
+    "scripts": {
+        "start": "expo start --dev-client",
+        "android": "expo run:android",
+        "ios": "expo run:ios",
+        "web": "expo start --web"
+    },
+    "dependencies": {
+        "@expo/metro-runtime": "~5.0.4",
+        "expo": "~53.0.9",
+        "expo-router": "~5.1.0",
+        "expo-splash-screen": "^0.30.9",
+        "expo-status-bar": "~2.2.3",
+        "react": "19.0.0",
+        "react-dom": "19.0.0",
+        "react-native": "0.79.2",
+        "react-native-web": "^0.20.0",
+        "react-native-webview": "13.13.5"
+    },
+    "devDependencies": {
+        "@babel/core": "^7.20.0"
+    },
+    "authors": {
+        "name": "Aayush Panchal",
+        "role": "Fullstack Developer",
+        "email": "Panchal41aayush@gmail.com"
+    },
+    "private": true
 }

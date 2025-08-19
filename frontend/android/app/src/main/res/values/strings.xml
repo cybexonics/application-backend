@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">learnx</string>
+    <string name="title_activity_main">learnx</string>
+    <string name="package_name">com.aayushpanchal.myapp</string>
+    <string name="custom_url_scheme">com.aayushpanchal.myapp</string>
+</resources>
