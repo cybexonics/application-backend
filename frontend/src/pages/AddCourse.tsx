@@ -171,7 +171,7 @@ const AddCourse = () => {
       };
 
       // Send course data to backend
-      const response = await fetch("https://learn-x-swart.vercel.app/api/courses", {
+      const response = await fetch(process.env.API_BASE_URL+"/api/courses", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

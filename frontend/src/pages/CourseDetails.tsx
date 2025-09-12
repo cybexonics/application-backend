@@ -31,7 +31,7 @@ const CourseDetails = () => {
     try {
       setIsLoading(true);
 
-      const response = await fetch(`https://learn-x-swart.vercel.app/api/courses/${courseId}`);
+      const response = await fetch(process.env.API_BASE_URL+`/api/courses/${courseId}`);
 
       if (!response.ok) {
         throw new Error("Failed to fetch course data");

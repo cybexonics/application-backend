@@ -25,7 +25,7 @@ const MyLearning = () => {
         throw new Error("No token found");
       }
 
-      const response = await fetch("https://learn-x-swart.vercel.app/api/courses/enrolled", {
+      const response = await fetch(process.env.API_BASE_URL+"/api/courses/enrolled", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
