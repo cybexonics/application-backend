@@ -53,7 +53,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         return;
       }
 
-      const response = await fetch(`https://api.eduplatform.com/auth/me`, {
+      const response = await fetch(`https://api.eduplatform.com/api/auth/me`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -91,7 +91,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const login = async (email: string, password: string) => {
     setIsLoading(true);
     try {
-      const response = await fetch(`https://api.eduplatform.com/auth/login`, {
+      const response = await fetch(`https://api.eduplatform.com/api/auth/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -125,7 +125,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const signup = async (name: string, email: string, password: string) => {
     setIsLoading(true);
     try {
-      const response = await fetch(`https://api.eduplatform.com/auth/signup`, {
+      const response = await fetch(`https://api.eduplatform.com/api/auth/signup`, {
   method: "POST",
   credentials: 'include',
   headers: {
@@ -158,7 +158,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
     setIsLoading(true);
     try {
-      const response = await fetch(`https://api.eduplatform.com/user/update-profile`, {
+      const response = await fetch(`https://api.eduplatform.com/api/user/update-profile`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
