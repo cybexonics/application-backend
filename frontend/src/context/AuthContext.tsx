@@ -88,7 +88,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     }
   }, [user]);
 
-  const login = async (email: string, password: string) => {
+  const login = async (email: string, password: string) => { 
     setIsLoading(true);
     try {
       const response = await fetch(`https://application-backend-rr3o.vercel.app/api/auth/login`, {
