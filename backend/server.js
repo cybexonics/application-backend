@@ -34,7 +34,7 @@ const server = http.createServer(app);
 // However, if your client will connect to the same base URL, this is fine.
 const io = new Server(server, {
   cors: {
-    origin:"*", // Use environment variable for client URL
+    origin:"https://application-backend-lemon.vercel.app", // Use environment variable for client URL
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     credentials: true,
   },
@@ -50,7 +50,7 @@ app.use(cookieParser());
 // CORS configuration - more secure
 app.use(
   cors({
-    origin:"*", // Use environment variable for client URL
+    origin:"https://application-backend-lemon.vercel.app", // Use environment variable for client URL
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
     credentials: true,
