@@ -89,38 +89,58 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   }, [user]);
 
   const login = async (email: string, password: string) => { 
-    setIsLoading(true);
-    try {
-      const response = await fetch(`https://application-backend-rr3o.vercel.app/api/auth/login`, {
+  setIsLoading(true);
+  try {
+    const response = await fetch(
+      `https://application-backend-rr3o.vercel.app/api/auth/login`,
+      {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({ email, password }),
-      });
+      }
+    );
 
-      if (!response.ok) {
+    // Handle non-OK responses clearly
+    if (!response.ok) {
+      if (response.status === 401) {
         throw new Error("Invalid credentials");
       }
-
-      const { token, user: foundUser } = await response.json();
-
-      // Assuming token is returned, you can save it in localStorage or use it for subsequent requests
-      localStorage.setItem("eduApp_token", token);
-
-
-      // Save user data without password
-      const { password: _, ...userWithoutPassword } = foundUser;
-      setUser(userWithoutPassword);
-      localStorage.setItem(AUTH_STORAGE_KEY, JSON.stringify(userWithoutPassword));
-      localStorage.setItem(ROLE_KEY, JSON.stringify(user.role));
-    } catch (error) {
-      console.error("Login error:", error);
-      throw error;
-    } finally {
-      setIsLoading(false);
+      throw new Error(`Login failed with status ${response.status}`);
     }
-  };
+
+    // Try parsing JSON safely (OPTIONS/empty responses won’t break)
+    let data;
+    try {
+      data = await response.json();
+    } catch {
+      throw new Error("Server returned invalid JSON");
+    }
+
+    const { token, user: foundUser } = data;
+
+    if (!token || !foundUser) {
+      throw new Error("Missing token or user data in response");
+    }
+
+    // Save token
+    localStorage.setItem("eduApp_token", token);
+
+    // Save user without password
+    const { password: _, ...userWithoutPassword } = foundUser;
+    setUser(userWithoutPassword);
+
+    localStorage.setItem(AUTH_STORAGE_KEY, JSON.stringify(userWithoutPassword));
+    localStorage.setItem(ROLE_KEY, JSON.stringify(userWithoutPassword.role));
+  } catch (error) {
+    console.error("Login error:", error);
+    throw error;
+  } finally {
+    setIsLoading(false);
+  }
+};
+
 
   const signup = async (name: string, email: string, password: string) => {
     setIsLoading(true);
